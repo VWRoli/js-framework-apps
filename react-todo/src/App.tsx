@@ -1,10 +1,19 @@
-import { Box } from '@mui/material';
 import './App.css';
 import Header from './components/Header';
 import Container from '@mui/material/Container';
 import Form from './components/Form';
+import Todo from './components/Todo';
+import { fetchTodos } from './api';
+import { useEffect, useState } from 'react';
+import { TodoType } from './types';
 
 function App() {
+  const [todos, setTodos] = useState<TodoType[]>([]);
+
+  useEffect(() => {
+    fetchTodos(setTodos);
+  }, []);
+
   return (
     <div className="App">
       <Container
@@ -13,6 +22,9 @@ function App() {
       >
         <Header />
         <Form />
+        {todos.map((t) => (
+          <Todo todo={t} key={t.id} />
+        ))}
       </Container>
     </div>
   );
