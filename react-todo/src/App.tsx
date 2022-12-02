@@ -6,6 +6,7 @@ import Todo from './components/Todo';
 import { fetchTodos } from './api';
 import { useEffect, useState } from 'react';
 import { TodoType } from './types';
+import Footer from './components/Footer';
 
 function App() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -25,6 +26,7 @@ function App() {
         {todos.map((t) => (
           <Todo todo={t} key={t.id} />
         ))}
+        <Footer />
       </Container>
     </div>
   );
