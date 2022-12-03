@@ -11,14 +11,16 @@ import { Box } from '@mui/material';
 
 const Home = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
+  const [open, setOpen] = useState(true);
   useEffect(() => {
     fetchTodos(setTodos);
   }, []);
 
   return (
     <Box>
-      <Header />
-      <Form />
+      <Header open={open} setOpen={setOpen} />
+      {open && <Form />}
+
       {todos.map((t) => (
         <Todo todo={t} key={t.id} />
       ))}
