@@ -27,25 +27,42 @@ toggleBtnEl.addEventListener('click', () => {
     todos = data;
     return data;
   };
-  await fetchTodos();
+
+  await fetchTodos(todos);
   todos.map((t) => renderData(t));
+
+  contentEl.addEventListener('click', (e) => {
+    const clicked = e.target.id;
+
+    if (clicked.startsWith('item')) deleteTodo(clicked.split('-')[1]);
+  });
 })();
+
+const deleteTodo = async (id) =>
+  fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+    .then((response) => response.json())
+    .then((json) => {
+      const item = document.querySelector(`#item-${id}`).closest('.todo');
+      item.classList.add('hidden');
+    });
 
 const renderData = (data) => {
   const html = `<div class="todo">
-  <div class="todo-wrapper">
+  <div id="todo-wrapper">
   <div class="todo-title">
   <label for="completed"
   ><span
   ><input
   type="checkbox"
-  id="completed"
+  id="completed-${data.id}"
   name="completed"
   ${data.completed ? 'checked' : ''} /></span
   ></label>
   <p class="empty-list">${data.title}</p>
   </div>
-        <div class="todo-actions"><button type="button">x</button></div>
+        <div class="todo-actions"><button type="button" id="item-${
+          data.id
+        }">x</button></div>
       </div>
     </div>`;
   contentEl.insertAdjacentHTML('afterbegin', html);

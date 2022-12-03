@@ -331,7 +331,7 @@ header {
   margin-bottom: 16px;
   background-color: #f5f5f5;
 }
-.todo-wrapper {
+#todo-wrapper {
   padding: 16px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -341,7 +341,7 @@ header {
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
-.todo-wrapper:last-child {
+#todo-wrapper:last-child {
   padding-bottom: 24px;
 }
 .todo-title {
