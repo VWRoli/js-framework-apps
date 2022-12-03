@@ -5,10 +5,10 @@ import { Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { createTodo } from '../api';
 import { TodoType } from '../types';
 
-interface Props {
+export interface FormProps {
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
-const Form: React.FC<Props> = (props) => {
+const Form: React.FC<FormProps> = (props) => {
   const [task, setTask] = useState('');
   const [completed, setCompleted] = useState(false);
 

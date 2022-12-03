@@ -21,3 +21,11 @@ export const createTodo = async (
   })
     .then((response) => response.json())
     .then((json) => setTodos((prev) => [...prev, json]));
+
+export const deleteTodo = async (
+  id: number,
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>
+) =>
+  fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+    .then((response) => response.json())
+    .then((json) => setTodos((prev) => prev.filter((p) => p.id !== id)));

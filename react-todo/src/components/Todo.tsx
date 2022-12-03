@@ -1,14 +1,16 @@
-import { CardContent, Typography } from '@mui/material';
+import { CardContent, IconButton, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import { TodoType } from '../types';
 import Checkbox from '@mui/material/Checkbox';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { red } from '@mui/material/colors';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import { FormProps } from './Form';
+import { deleteTodo } from '../api';
 
-interface Props {
+interface Props extends FormProps {
   todo: TodoType;
 }
 const Todo: React.FC<Props> = (props) => {
@@ -31,7 +33,13 @@ const Todo: React.FC<Props> = (props) => {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <EditOutlinedIcon sx={{ color: 'primary.main', cursor: 'pointer' }} />
-          <CloseOutlinedIcon sx={{ color: red[500], cursor: 'pointer' }} />
+          <IconButton
+            aria-label="delete"
+            sx={{ color: red[500] }}
+            onClick={() => deleteTodo(props.todo.id, props.setTodos)}
+          >
+            <DeleteIcon />
+          </IconButton>
         </Box>
       </CardContent>
     </Card>

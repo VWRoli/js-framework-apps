@@ -5,7 +5,7 @@ import { TodoType } from '../types';
 import Form from '../components/Form';
 import Header from '../components/Header';
 import Todo from '../components/Todo';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Home = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -20,8 +20,9 @@ const Home = () => {
       <Header open={open} setOpen={setOpen} />
       {open && <Form setTodos={setTodos} />}
 
+      {!todos.length && <Typography>No todos</Typography>}
       {todos.map((t) => (
-        <Todo todo={t} key={t.id} />
+        <Todo todo={t} key={t.id} setTodos={setTodos} />
       ))}
     </Box>
   );
