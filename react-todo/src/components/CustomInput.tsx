@@ -3,7 +3,7 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 
 interface Props {
   label: string;
-  handleChange: () => void;
+  handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
 }
 const CustomInput: React.FC<Props> = (props) => {
