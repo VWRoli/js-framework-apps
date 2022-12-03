@@ -12,7 +12,7 @@
     <div class="container">
       <header>
         <h5 class="title">Vanilla JS todo app</h5>
-        <button type="button" id="toggle-button" class="primary">Open</button>
+        <button type="button" id="toggle-button" class="error">close</button>
       </header>
       <form action="" id="add-form" class="form">
         <div class="form-control">
@@ -36,24 +36,8 @@
         </div>
         <button type="submit" class="submit-btn">Save task</button>
       </form>
-      <div class="content">
+      <div id="content">
         <p class="empty-list">No todos</p>
-        <div class="todo">
-          <div class="todo-wrapper">
-            <div class="todo-title">
-              <label for="completed"
-                ><span
-                  ><input
-                    type="checkbox"
-                    id="completed"
-                    name="completed"
-                    value="completed" /></span
-              ></label>
-              <p class="empty-list">No todos</p>
-            </div>
-            <div class="todo-actions"><button type="button">x</button></div>
-          </div>
-        </div>
       </div>
       <footer>
         <button type="button" class="about-link">
