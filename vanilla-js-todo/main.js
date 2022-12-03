@@ -7,6 +7,9 @@ const toggleBtnEl = document.querySelector('#toggle-button');
 const formEl = document.querySelector('#add-form');
 const contentEl = document.querySelector('#content');
 
+let rendered = fas;
+let todos = [];
+
 toggleBtnEl.addEventListener('click', () => {
   //Change btn color
   toggleBtnEl.classList.toggle('primary');
@@ -22,9 +25,14 @@ toggleBtnEl.addEventListener('click', () => {
 const fetchTodos = async () =>
   fetch(`${API_URL}?_limit=5`)
     .then((response) => response.json())
-    .then((json) => json.map((data) => renderData(data)));
+    .then((json) => {
+      rendered = true;
+    });
 
 fetchTodos();
+console.log(todos);
+
+todos.map((t) => renderData(t));
 
 const renderData = (data) => {
   const html = `<div class="todo">
