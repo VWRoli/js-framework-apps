@@ -29,3 +29,20 @@ export const deleteTodo = async (
   fetch(`${API_URL}/${id}`, { method: 'DELETE' })
     .then((response) => response.json())
     .then((json) => setTodos((prev) => prev.filter((p) => p.id !== id)));
+
+export const updateTodo = async (
+  id: number,
+  todo: TodoType,
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>
+) =>
+  fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(todo),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then((response) => response.json())
+    .then((json) =>
+      setTodos((prev) => prev.map((p) => (p.id === id ? todo : p)))
+    );

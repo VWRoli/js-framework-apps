@@ -8,7 +8,7 @@ import { red } from '@mui/material/colors';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import { FormProps } from './Form';
-import { deleteTodo } from '../api';
+import { deleteTodo, updateTodo } from '../api';
 
 interface Props extends FormProps {
   todo: TodoType;
@@ -18,6 +18,11 @@ const Todo: React.FC<Props> = (props) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
+    const updatedTodo = {
+      ...props.todo,
+      completed: event.target.checked,
+    };
+    updateTodo(props.todo.id, updatedTodo, props.setTodos);
   };
   return (
     <Card
@@ -32,7 +37,6 @@ const Todo: React.FC<Props> = (props) => {
           <Typography>{props.todo.title}</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <EditOutlinedIcon sx={{ color: 'primary.main', cursor: 'pointer' }} />
           <IconButton
             aria-label="delete"
             sx={{ color: red[500] }}
