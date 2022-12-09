@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import Footer from "../components/Footer.vue";
 
 export default {
@@ -13,7 +13,7 @@ export default {
     <div class="about-content">
       <p class="text">This is just a simple about page</p>
       <button class="about-link">
-        <a href="/home">Home</a>
+        <a href="/">Home</a>
       </button>
     </div>
     <Footer />
