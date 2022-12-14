@@ -1,11 +1,11 @@
 <div class="container">
 	<slot />
+	<footer>
+		<button class="about-link">
+			<a href="/about">About</a>
+		</button>
+	</footer>
 </div>
-<footer>
-	<button class="about-link">
-		<a href="/about">About</a>
-	</button>
-</footer>
 
 <style>
 	.container {
