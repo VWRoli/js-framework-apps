@@ -2,9 +2,14 @@
 	export let label: string;
 	export let clickHandler: () => void;
 	export let className: string;
+	export let fullWidth: boolean = false;
 </script>
 
-<button id="toggle-button" class={className} on:click={clickHandler}>{label}</button>
+<button
+	id="toggle-button"
+	class={`${className} ${fullWidth ? 'fullWidth' : ''}`}
+	on:click={clickHandler}>{label}</button
+>
 
 <style>
 	.primary {
@@ -12,6 +17,9 @@
 	}
 	.error {
 		background-color: #d32f2f;
+	}
+	.fullWidth {
+		width: 100%;
 	}
 	#toggle-button {
 		display: -webkit-inline-box;

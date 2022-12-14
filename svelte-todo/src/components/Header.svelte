@@ -1,11 +1,7 @@
-<script>
+<script lang="ts">
 	import Button from './Button.svelte';
-
-	let isOpen = false;
-
-	function toggleOpen() {
-		isOpen = !isOpen;
-	}
+	export let isOpen: boolean;
+	export let toggleOpen: () => void;
 </script>
 
 <header>
