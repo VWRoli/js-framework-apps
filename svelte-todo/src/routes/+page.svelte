@@ -20,6 +20,20 @@
 			console.log(error);
 		}
 	}
+	async function editTodo(id: number, todo: TodoType) {
+		try {
+			await fetch(`${API_URL}/${id}`, {
+				method: 'PUT',
+				body: JSON.stringify(todo),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8'
+				}
+			});
+			todos = todos.map((p: TodoType) => (p.id === id ? todo : p));
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	onMount(async function (): Promise<void> {
 		const response = await fetch(`${API_URL}?_limit=5`);
 		const data = await response.json();
@@ -30,5 +44,5 @@
 <Header {isOpen} {toggleOpen} />
 {#if isOpen}<Form />{/if}
 {#each todos as todo}
-	<Item {todo} {deleteTodo} />
+	<Item {todo} {deleteTodo} {editTodo} />
 {/each}

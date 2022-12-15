@@ -3,13 +3,22 @@
 
 	export let todo: TodoType;
 	export let deleteTodo: (id: number) => Promise<void>;
+	export let editTodo: (id: number, todo: TodoType) => Promise<void>;
 </script>
 
 <div class="todo">
 	<div id="todo-wrapper">
 		<div class="todo-title">
 			<label for="completed"
-				><span><input type="checkbox" class="checkbox" name="completed" /></span></label
+				><span
+					><input
+						type="checkbox"
+						class="checkbox"
+						name="completed"
+						checked={todo.completed}
+						on:change={() => editTodo(todo.id, todo)}
+					/></span
+				></label
 			>
 			<p class="empty-list">{todo.title}</p>
 		</div>
