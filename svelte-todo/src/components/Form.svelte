@@ -1,11 +1,21 @@
-<script>
+<script lang="ts">
+	import type { TodoType } from 'src/types';
 	import Button from './Button.svelte';
+	let title = '';
+	let completed = false;
+	export let createTodo: (todo: TodoType) => Promise<void>;
+
+	function handleCreate() {
+		createTodo({ title, completed, userId: 1, id: Math.random() });
+		title = '';
+		completed = false;
+	}
 </script>
 
 <form action="/" class="form">
 	<div class="form-control">
 		<div class="input-base">
-			<input type="text" id="todo" name="todo" placeholder="Task" />
+			<input type="text" id="todo" name="todo" placeholder="Task" bind:value={title} />
 			<fieldset>
 				<legend><span class="notranslate">&ZeroWidthSpace;</span></legend>
 			</fieldset>
@@ -14,11 +24,11 @@
 	<div class="form-group">
 		<label for="completed"
 			><span class="completed-label">Completed</span><span
-				><input type="checkbox" id="completed" name="completed" value="completed" /></span
+				><input type="checkbox" id="completed" name="completed" bind:checked={completed} /></span
 			></label
 		>
 	</div>
-	<Button label="Save task" className="primary" clickHandler={() => {}} fullWidth={true} />
+	<Button label="Save task" className="primary" clickHandler={handleCreate} fullWidth={true} />
 </form>
 
 <style>
@@ -43,36 +53,7 @@
 		margin-top: 16px;
 		margin-bottom: 16px;
 	}
-	.form-control label {
-		color: rgba(0, 0, 0, 0.6);
-		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-		font-weight: 400;
-		font-size: 1rem;
-		line-height: 1.4375em;
-		letter-spacing: 0.00938em;
-		padding: 0;
-		position: relative;
-		display: block;
-		transform-origin: top left;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		max-width: calc(100% - 24px);
-		position: absolute;
-		left: 0;
-		top: 0;
-		-webkit-transform: translate(14px, 16px) scale(1);
-		-moz-transform: translate(14px, 16px) scale(1);
-		-ms-transform: translate(14px, 16px) scale(1);
-		transform: translate(14px, 16px) scale(1);
-		-webkit-transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
-			-webkit-transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
-			max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-		transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
-			transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-		z-index: 1;
-		pointer-events: none;
-	}
+
 	.input-base {
 		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 		font-weight: 400;

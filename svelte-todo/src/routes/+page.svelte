@@ -34,6 +34,21 @@
 			console.log(error);
 		}
 	}
+	async function createTodo(todo: TodoType) {
+		try {
+			const res = await fetch(`${API_URL}`, {
+				method: 'POST',
+				body: JSON.stringify(todo),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8'
+				}
+			});
+			const data: TodoType = await res.json();
+			todos = [...todos, data];
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	onMount(async function (): Promise<void> {
 		const response = await fetch(`${API_URL}?_limit=5`);
 		const data = await response.json();
@@ -42,7 +57,7 @@
 </script>
 
 <Header {isOpen} {toggleOpen} />
-{#if isOpen}<Form />{/if}
+{#if isOpen}<Form {createTodo} />{/if}
 {#each todos as todo}
 	<Item {todo} {deleteTodo} {editTodo} />
 {/each}
